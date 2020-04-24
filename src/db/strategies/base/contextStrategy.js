@@ -1,6 +1,7 @@
 const interfaceCrud = require('./../interfaces/interfaceCrud')
 class ContextStrategy extends interfaceCrud {
   constructor(strategy) {
+    super()
     this._database = strategy
   }
 

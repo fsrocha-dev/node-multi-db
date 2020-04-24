@@ -12,5 +12,10 @@
     "multidb"
   ],
   "author": "fsrocha-dev",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.0.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.7"
+  }
 }

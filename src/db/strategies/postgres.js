@@ -6,7 +6,6 @@ class Postgres extends interfaceCrud {
     super()
     this._driver = null
     this._heroes = null
-    this._connect()
   }
 
   async isConnected() {
@@ -19,7 +18,7 @@ class Postgres extends interfaceCrud {
     }
   }
 
-  _connect() {
+  async connect() {
     this._driver = new Sequelize(
       'heroes',
       'root',
@@ -29,6 +28,7 @@ class Postgres extends interfaceCrud {
       quoteIdentifiers: false,
       operatorsAliases: false
     })
+    await this.defineModel()
   }
 
   async defineModel() {
@@ -47,12 +47,17 @@ class Postgres extends interfaceCrud {
         type: Sequelize.STRING,
         required: true
       }
+    }, {
+      tableName: 'TB_HEROES',
+      freezeTableName: false,
+      timestamps: false
     })
     await this._heroes.sync()
   }
 
-  create(item) {
-    console.log("item salvo em postgres")
+  async create(item) {
+    const { dataValues } = await this._heroes.create(item)
+    return dataValues
   }
 }
 

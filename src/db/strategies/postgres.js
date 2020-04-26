@@ -70,6 +70,11 @@ class Postgres extends interfaceCrud {
     })
     return result;
   }
+
+  async delete(id) {
+    const query = id ? { id } : {}
+    return this._heroes.destroy({ where: query })
+  }
 }
 
 module.exports = Postgres

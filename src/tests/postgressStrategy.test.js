@@ -17,6 +17,7 @@ describe('Postegres Strategy', function () {
   this.timeout(Infinity)
   this.beforeAll(async function () {
     await context.connect()
+    await context.delete()
     await context.create(MOCK_HERO_UPDATE)
   })
 
@@ -48,6 +49,13 @@ describe('Postegres Strategy', function () {
 
     assert.deepEqual(result, 1);
     assert.deepEqual(updatedItem.name, newItem.name)
+  })
+
+  it('Remove by id', async function () {
+    const [item] = await context.read({})
+    const result = await context.delete(item.id)
+
+    assert.deepEqual(result, 1)
   })
 
 })

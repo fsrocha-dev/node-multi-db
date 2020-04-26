@@ -26,7 +26,7 @@ class Postgres extends interfaceCrud {
       host: 'localhost',
       dialect: 'postgres',
       quoteIdentifiers: false,
-      operatorsAliases: false
+      operatorsAliases: '1'
     })
     await this.defineModel()
   }
@@ -62,6 +62,13 @@ class Postgres extends interfaceCrud {
   async create(item) {
     const { dataValues } = await this._heroes.create(item)
     return dataValues
+  }
+
+  async update(id, item) {
+    const result = await this._heroes.update(item, {
+      where: { id }
+    })
+    return result;
   }
 }
 

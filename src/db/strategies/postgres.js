@@ -55,6 +55,10 @@ class Postgres extends interfaceCrud {
     await this._heroes.sync()
   }
 
+  read(query = {}) {
+    return this._heroes.findAll({ where: query, raw: true })
+  }
+
   async create(item) {
     const { dataValues } = await this._heroes.create(item)
     return dataValues

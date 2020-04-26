@@ -26,4 +26,11 @@ describe('Postegres Strategy', function () {
     assert.deepEqual(result, MOCK_HERO_CREATE)
   })
 
+  it('Read', async function () {
+    const [result] = await context.read({ name: MOCK_HERO_CREATE.name })
+
+    delete result.id
+    assert.deepEqual(result, MOCK_HERO_CREATE)
+  })
+
 })
